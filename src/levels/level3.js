@@ -1,0 +1,95 @@
+export const level3 = {
+  name: 'Die Kristallhöhle',
+  levelIndex: 3,
+  background: 'bg_crystal',
+  platformKey: 'platform_crystal',
+  enemyType: 'steinwaechter',
+  worldWidth: 5600,
+  worldHeight: 540,
+  spawn: { x: 100, y: 400 },
+  goal:  { x: 5480, y: 300 },
+
+  ground: { y: 500, segments: [
+    { x: 0,    width: 5600 }
+  ]},
+
+  platforms: [
+    { x: 300,  y: 420, width: 192 },
+    { x: 550,  y: 340, width: 192 },
+    { x: 800,  y: 250, width: 192 },
+    { x: 1050, y: 340, width: 192 },
+    { x: 1300, y: 420, width: 192 },
+    { x: 1550, y: 310, width: 192 },
+    { x: 1800, y: 220, width: 288 },
+    { x: 2150, y: 330, width: 192 },
+    { x: 2400, y: 240, width: 192 },
+    { x: 2650, y: 340, width: 192 },
+    { x: 2900, y: 240, width: 288 },
+    { x: 3250, y: 340, width: 192 },
+    { x: 3500, y: 250, width: 192 },
+    { x: 3750, y: 350, width: 192 },
+    { x: 4000, y: 250, width: 288 },
+    { x: 4350, y: 350, width: 192 },
+    { x: 4600, y: 260, width: 192 },
+    { x: 4850, y: 360, width: 192 },
+    { x: 5100, y: 270, width: 288 },
+    { x: 5350, y: 280, width: 192 }
+  ],
+
+  enemies: [
+    { x: 600,  y: 470 },
+    { x: 900,  y: 220 },
+    { x: 1150, y: 310 },
+    { x: 1400, y: 470 },
+    { x: 1650, y: 280 },
+    { x: 1900, y: 190 },
+    { x: 2200, y: 300 },
+    { x: 2500, y: 210 },
+    { x: 2750, y: 310 },
+    { x: 3000, y: 210 },
+    { x: 3300, y: 470 },
+    { x: 3550, y: 220 },
+    { x: 3800, y: 320 },
+    { x: 4050, y: 220 },
+    { x: 4400, y: 320 },
+    { x: 4650, y: 230 },
+    { x: 4900, y: 330 },
+    { x: 5150, y: 240 }
+  ],
+
+  collectibles: [
+    { x: 380,  y: 380 },
+    { x: 630,  y: 300 },
+    { x: 880,  y: 210 },
+    { x: 1130, y: 300 },
+    { x: 1380, y: 380 },
+    { x: 1630, y: 270 },
+    { x: 1880, y: 180 },
+    { x: 2230, y: 290 },
+    { x: 2480, y: 200 },
+    { x: 2730, y: 300 },
+    { x: 2980, y: 200 },
+    { x: 3330, y: 300 },
+    { x: 3580, y: 210 },
+    { x: 3830, y: 310 },
+    { x: 4080, y: 210 },
+    { x: 4430, y: 310 },
+    { x: 4680, y: 220 },
+    { x: 4930, y: 320 },
+    { x: 5180, y: 230 },
+    { x: 5430, y: 240 }
+  ],
+
+  decorations: [
+    { key: 'crystal_deco', x: 250,  y: 474 },
+    { key: 'crystal_deco', x: 700,  y: 474 },
+    { key: 'crystal_deco', x: 1200, y: 474 },
+    { key: 'crystal_deco', x: 1700, y: 474 },
+    { key: 'crystal_deco', x: 2300, y: 474 },
+    { key: 'crystal_deco', x: 2900, y: 474 },
+    { key: 'crystal_deco', x: 3500, y: 474 },
+    { key: 'crystal_deco', x: 4100, y: 474 },
+    { key: 'crystal_deco', x: 4700, y: 474 },
+    { key: 'crystal_deco', x: 5300, y: 474 }
+  ]
+};

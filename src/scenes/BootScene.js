@@ -37,6 +37,12 @@ export class BootScene extends Phaser.Scene {
     this._makeTeddy();
     this._makeDustBunny('staubfluse');
 
+    // Fußball-Level
+    this._makePitchPlatform('platform_pitch');
+    this._makeBackground('bg_pitch', [0x6fcf6f, 0x4caf50]);
+    this._makeSoccerBall('fussball');
+    this._makePitchDecorations();
+
     this.scene.start('MenuScene');
   }
 
@@ -665,6 +671,88 @@ export class BootScene extends Phaser.Scene {
     g.lineBetween(9, 17, 18, 19); g.lineBetween(22, 19, 31, 17);
     g.beginPath(); g.arc(20, 33, 3.5, Math.PI + 0.5, 2 * Math.PI - 0.5, false); g.strokePath();
     this._save(g, key, W, H);
+  }
+
+  // ── Fußball-Level ─────────────────────────────────────────
+
+  // Rasen-Plattform mit Kreidelinien
+  _makePitchPlatform(key) {
+    const W = 96, H = 24;
+    const g = this._gfx();
+    g.fillStyle(0x4caf50, 1);
+    g.lineStyle(2, 0x2e7d32, 1);
+    g.fillRoundedRect(1, 2, W - 2, H - 3, 3);
+    g.strokeRoundedRect(1, 2, W - 2, H - 3, 3);
+    // abwechselnde Mäh-Streifen
+    g.fillStyle(0x5cbf5c, 0.6);
+    g.fillRect(1, 2, 24, H - 3);
+    g.fillRect(49, 2, 24, H - 3);
+    // weiße Mittellinie
+    g.lineStyle(2, 0xffffff, 0.9);
+    g.lineBetween(4, 6, W - 4, 6);
+    this._save(g, key, W, H);
+  }
+
+  // Fußball-Gegner: rollender Ball mit Fünfeck-Muster und frechen Augen
+  _makeSoccerBall(key) {
+    const W = 40, H = 40;
+    const g = this._gfx();
+    const cx = 20, cy = 20, r = 17;
+    g.fillStyle(0xffffff, 1);
+    g.lineStyle(2.5, 0x222222, 1);
+    g.fillCircle(cx, cy, r); g.strokeCircle(cx, cy, r);
+    // schwarze Fünfecke (vereinfacht als Sechsecke/Kreise)
+    g.fillStyle(0x222222, 1);
+    this._drawStar(g, cx, cy - 5, 5, 6, 3);
+    [[cx - 11, cy + 3], [cx + 11, cy + 3], [cx - 6, cy + 14], [cx + 6, cy + 14]].forEach(([x, y]) => {
+      g.fillCircle(x, y, 4);
+    });
+    g.lineStyle(1, 0x222222, 0.7);
+    g.lineBetween(cx, cy - 5, cx - 11, cy + 3);
+    g.lineBetween(cx, cy - 5, cx + 11, cy + 3);
+    // freche Augen
+    g.fillStyle(0xffffff, 1);
+    g.fillCircle(cx - 6, cy - 2, 4.5); g.fillCircle(cx + 6, cy - 2, 4.5);
+    g.fillStyle(0x1a1a2e, 1);
+    g.fillCircle(cx - 5, cy - 2, 2.2); g.fillCircle(cx + 7, cy - 2, 2.2);
+    g.lineStyle(2, 0x222222, 1);
+    g.lineBetween(cx - 11, cy - 7, cx - 2, cy - 4);
+    g.lineBetween(cx + 2, cy - 4, cx + 11, cy - 7);
+    this._save(g, key, W, H);
+  }
+
+  _makePitchDecorations() {
+    // Hütchen
+    const c = this._gfx();
+    c.fillStyle(0xff6a00, 1);
+    c.lineStyle(2, 0x000000, 1);
+    c.fillTriangle(16, 2, 2, 30, 30, 30); c.strokeTriangle(16, 2, 2, 30, 30, 30);
+    c.fillStyle(0xffffff, 1);
+    c.fillRect(5, 17, 22, 5); c.strokeRect(5, 17, 22, 5);
+    this._save(c, 'cone_deco', 32, 32);
+
+    // Mini-Tor mit Netz
+    const g = this._gfx();
+    g.lineStyle(3, 0xffffff, 1);
+    g.strokeRect(2, 2, 40, 26);
+    g.lineStyle(1, 0xdddddd, 0.8);
+    for (let x = 6; x < 42; x += 7) g.lineBetween(x, 2, x, 28);
+    for (let y = 6; y < 28; y += 7) g.lineBetween(2, y, 42, y);
+    this._save(g, 'goal_deco', 44, 30);
+
+    // Wimpelkette (Dreiecksfähnchen am Himmel)
+    const p = this._gfx();
+    const colors = [0xff4444, 0xffd54f, 0x4faaff, 0x66cc66];
+    p.lineStyle(2, 0x555555, 1);
+    p.lineBetween(0, 4, 120, 4);
+    colors.forEach((col, i) => {
+      const x = 8 + i * 28;
+      p.fillStyle(col, 1);
+      p.fillTriangle(x, 4, x + 12, 4, x + 6, 20);
+      p.lineStyle(1, 0x000000, 0.6);
+      p.strokeTriangle(x, 4, x + 12, 4, x + 6, 20);
+    });
+    this._save(p, 'pennant_deco', 120, 24);
   }
 
   // ── Katzen-Level ──────────────────────────────────────────

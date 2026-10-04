@@ -8,7 +8,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.hitsLeft = type === 'steinwaechter' ? 2 : 1;
     this.dead = false;
 
-    const speeds = { waldgeist: 80, windgeist: 130, steinwaechter: 50, wollknaeuel: 100, staubfluse: 90 };
+    const speeds = { waldgeist: 80, windgeist: 130, steinwaechter: 50, wollknaeuel: 100, staubfluse: 90, fussball: 140 };
     this.moveSpeed = speeds[type] || 80;
     this.direction = 1;
 

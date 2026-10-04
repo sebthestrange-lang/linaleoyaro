@@ -6,8 +6,9 @@ import { level2 }      from '../levels/level2.js';
 import { level3 }      from '../levels/level3.js';
 import { level4 }      from '../levels/level4.js';
 import { level5 }      from '../levels/level5.js';
+import { level6 }      from '../levels/level6.js';
 
-const LEVELS = { 1: level1, 2: level2, 3: level3, 4: level4, 5: level5 };
+const LEVELS = { 1: level1, 2: level2, 3: level3, 4: level4, 5: level5, 6: level6 };
 
 export class GameScene extends Phaser.Scene {
   constructor() { super('GameScene'); }
@@ -51,6 +52,14 @@ export class GameScene extends Phaser.Scene {
           ease: 'Sine.easeInOut', yoyo: true, repeat: -1
         });
       }
+      // Wimpelkette hängt fest und weht nur leicht
+      if (d.key === 'pennant_deco') {
+        this.tweens.add({
+          targets: img, angle: { from: -2, to: 2 },
+          duration: 1400 + Math.random() * 600,
+          ease: 'Sine.easeInOut', yoyo: true, repeat: -1
+        });
+      }
     });
 
     // platforms
@@ -62,7 +71,7 @@ export class GameScene extends Phaser.Scene {
     this.portal.body.setSize(40, 70);
 
     // enemies
-    this.enemies = this.physics.add.group({ classType: Enemy, runChildUpdate: false });
+    this.enemies = this.physics.add.group({ classType: Enemy, runChildUpdate: false, allowGravity: false });
     lvl.enemies.forEach(e => {
       const enemy = new Enemy(this, e.x, e.y, lvl.enemyType);
       this.enemies.add(enemy, true);
